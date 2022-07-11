@@ -1,6 +1,11 @@
+//
+// Created by appetitus on 05.03.2022.
+//
+#pragma once
+
 #include <iostream>
 #include <fstream>
-#include <string>
+#include <string.h>
 #include "CMDFile.h"
 
 using namespace std;
@@ -8,58 +13,58 @@ using namespace KeyWord;
 
 void CMDFile::GetFiles()
 {
-	cout << "Enter the correct way to the directory:\n";
-	cin >> way;
+    cout << "Enter the correct way to the directory:\n";
+    cin >> way;
 
-	cout << "\nEnter the expansion of the files:\n";
-	cin >> expansion;
+    cout << "\nEnter the expansion of the files:\n";
+    cin >> expansion;
 
-	strcat_s(dway, way);
-	strcat_s(dway, sign2);
-	strcat_s(dway, expansion);
-	strcat_s(dway, sign1);
-	strcat_s(dway, way);
-	strcat_s(dway, file);
+    strcat(dway, way);
+    strcat(dway, sign2);
+    strcat(dway, expansion);
+    strcat(dway, sign1);
+    strcat(dway, way);
+    strcat(dway, file);
 
-	system(dway);
+    system(dway);
 }
 
 void CMDFile::CountExpansion()
 {
-	strcat_s(p, way);
-	strcat_s(p, file);
+    strcat(p, way);
+    strcat(p, file);
 
-	static const string path = p;
+    static const string path = p;
 
-	ifstream fin;
-	fin.open(path);
+    ifstream fin;
+    fin.open(path);
 
-	if (!fin.is_open())
-	{
-		cout << "File isn't open!\n";
-	}
-	else
-	{
-		int tcount = 0, i = 0; char ch;
-		while (fin.get(ch))
-		{
-			if (tcount == strlen(expansion))
-			{
-				count++;
-				tcount = i = 0;
-			}
-			if (expansion[i] == ch)
-			{
-				tcount++; i++;
-			}
-			else tcount = i = 0;
-		}
-		fin.close();
+    if (!fin.is_open())
+    {
+        cout << "File isn't open!\n";
+    }
+    else
+    {
+        int tcount = 0, i = 0; char ch;
+        while (fin.get(ch))
+        {
+            if (tcount == strlen(expansion))
+            {
+                count++;
+                tcount = i = 0;
+            }
+            if (expansion[i] == ch)
+            {
+                tcount++; i++;
+            }
+            else tcount = i = 0;
+        }
+        fin.close();
 
-		cout << "\nResult: " << count << " files with expansion " << expansion << endl;
+        cout << "\nResult: " << count << " files with expansion " << expansion << endl;
 
-		strcat_s(erase, way);
-		strcat_s(erase, file);
-		system(erase);
-	}
+        strcat(erase, way);
+        strcat(erase, file);
+        system(erase);
+    }
 }
