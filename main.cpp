@@ -5,12 +5,16 @@
 #include "IFileSystem.h"
 #include "CMDFile.h"
 #include "Users.h"
+#include "DBConnection.h"
 
 using namespace std;
 using namespace KeyWord;
 
 int main()
 {
+    DBConnection db;
+    db.Connection();
+
     CMDFile cmd;
     Users u;
 

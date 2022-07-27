@@ -1,3 +1,7 @@
 # Practical
 
-Upload the new versions of program.
+
+1) Solve the problem with CMake file.
+
+2) Try to connect database. (in process...)
+

@@ -1,9 +1,9 @@
 //
-// Created by appetitus on 05.03.2022.
+// Created by appetitus on 27.07.22.
 //
 
-#ifndef TEST_CMDFILE_H
-#define TEST_CMDFILE_H
+#ifndef LINUXPREVIEW_CMDFILE_H
+#define LINUXPREVIEW_CMDFILE_H
 
 
 #include "IFileSystem.h"
@@ -31,4 +31,4 @@ namespace KeyWord
 }
 
 
-#endif //TEST_CMDFILE_H
+#endif //LINUXPREVIEW_CMDFILE_H

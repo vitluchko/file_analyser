@@ -1,0 +1,3 @@
+/home/appetitus/CLionProjects/LinuxPreview/CMDFile.cpp
+/home/appetitus/CLionProjects/LinuxPreview/main.cpp
+/home/appetitus/CLionProjects/LinuxPreview/Users.cpp
