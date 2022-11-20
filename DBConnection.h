@@ -20,6 +20,12 @@ private:
 
 public:
     void Create_Operation(sqlite3 *db, const char *sql_statment);
+
+    void Basic_Operation(sqlite3 *db, const char *sql_statement);
+
+    static int Create_Or_Insert_Callback(void *NotUsed, int argc, char **argv, char **azColName);
+
+    static int Operation_Callback(void  *data, int  argc, char **argv, char **azColName);
 };
 
 
