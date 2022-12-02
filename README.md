@@ -1,4 +1,4 @@
-# Practical
+# file_analyser
 Search for files by expansion and write to the database
 
 The user enters the path and file expansion, which will count the number of files 
