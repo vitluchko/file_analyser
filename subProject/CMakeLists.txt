@@ -8,9 +8,7 @@ set(HEADER_LIB IFileSystem.h
                 CMDFile.h)
 
 set(SOURCE_LIB Users.cpp
-                CMDFile.cpp 
-                DBConnection.cpp 
-                DBConnection.h)
+                CMDFile.cpp DBConnection.cpp DBConnection.h)
 
-add_library(foo STATIC ${HEADER_LIB} ${SOURCE_LIB})
+add_library(foo STATIC ${HEADER_LIB} ${SOURCE_LIB} ${SQLITE3_LIBRARY})
 

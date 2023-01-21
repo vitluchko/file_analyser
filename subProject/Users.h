@@ -9,9 +9,7 @@
 
 class Users {
 public:
-    void FileReading(IFileSystem& method);
-    void Countig(IFileSystem& method);
+    void getFilesByExpansions(IFileSystem& method);
 };
-
 
 #endif //LINUXPREVIEW_USERS_H

@@ -5,10 +5,11 @@
 #ifndef FILEREADER_DBCONNECTION_H
 #define FILEREADER_DBCONNECTION_H
 
-
-#include <sqlite3.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <sqlite3.h>
+
+using namespace std;
 
 class DBConnection {
 private:
@@ -16,17 +17,10 @@ private:
     char *zErrMsg = 0;
     int rc;
     char *sql;
-    const char* data = "Callback function called";
+    static int callback(void *NotUsed, int argc, char **argv, char **azColName);
 
 public:
-    void Create_Operation(sqlite3 *db, const char *sql_statment);
-
-    void Basic_Operation(sqlite3 *db, const char *sql_statement);
-
-    static int Create_Or_Insert_Callback(void *NotUsed, int argc, char **argv, char **azColName);
-
-    static int Operation_Callback(void  *data, int  argc, char **argv, char **azColName);
+    void openDatabase();
 };
-
 
 #endif //FILEREADER_DBCONNECTION_H

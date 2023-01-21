@@ -2,68 +2,31 @@
 // Created by appetitus on 27.07.22.
 //
 
-#include <iostream>
-#include <fstream>
-#include <cstring>
 #include "CMDFile.h"
 
-using namespace std;
-using namespace KeyWord;
-
-void CMDFile::GetFiles()
-{
-    cout << "Enter the correct way to the directory:\n";
-    cin >> way;
-
-    cout << "\nEnter the expansion of the files:\n";
-    cin >> expansion;
-
-    strcat(dway, way);
-    strcat(dway, sign2);
-    strcat(dway, expansion);
-    strcat(dway, sign1);
-    strcat(dway, way);
-    strcat(dway, file);
-
-    system(dway);
+void CMDFile::EnterPath() {
+    cout << "Enter root path: ";
+    getline(cin, path);
+    cout << "Enter expected expansion: ";
+    getline(cin, expansion);
 }
 
-void CMDFile::CountExpansion()
-{
-    strcat(p, way);
-    strcat(p, file);
+void CMDFile::getFilesByExpansions() {
+    EnterPath();
+    const regex check_expansion(".+(" + expansion + ")");
 
-    static const string path = p;
+    try {
+        for(const auto& entry : fs::directory_iterator(path)) {
+            if (is_directory(entry.path())) {
 
-    ifstream fin;
-    fin.open(path);
-
-    if (!fin.is_open())
-    {
-        cout << "File isn't open!\n";
-    }
-    else
-    {
-        int tcount = 0, i = 0; char ch;
-        while (fin.get(ch))
-        {
-            if (tcount == strlen(expansion))
-            {
-                count++;
-                tcount = i = 0;
             }
-            if (expansion[i] == ch)
-            {
-                tcount++; i++;
+            else if (regex_match(entry.path().string(), check_expansion)) {
+                files_vector.push_back(entry.path().string());
             }
-            else tcount = i = 0;
         }
-        fin.close();
-
-        cout << "\nResult: " << count << " files with expansion " << expansion << endl;
-
-        strcat(erase, way);
-        strcat(erase, file);
-        system(erase);
+    }
+    catch (exception& ex) {
+        cout << "Incorrect directory. Please try again." << endl << endl;
+        getFilesByExpansions();
     }
 }

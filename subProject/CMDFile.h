@@ -5,30 +5,30 @@
 #ifndef LINUXPREVIEW_CMDFILE_H
 #define LINUXPREVIEW_CMDFILE_H
 
-
 #include "IFileSystem.h"
+#include <iostream>
+#include <filesystem>
+#include <fstream>
+#include <vector>
+#include <cstring>
+#include <regex>
 
-namespace KeyWord
-{
-    class CMDFile : public IFileSystem
-    {
-    private:
-        char file[50] = "info.txt";
-        char dway[255] = "dir ";
-        char erase[140] = "erase ";
-        char sign1[4] = " > "; char sign2[2] = "*";
+using namespace std;
+namespace fs = filesystem;
 
-        char way[70];
-        char expansion[10];
-        int count = 0;
+class CMDFile : public IFileSystem {
+private:
+    string path;
+    string expansion;
+    void EnterPath();
 
-        char p[130] = "";
+public:
+    vector<string> files_vector;
 
-    public:
-        void GetFiles() override;
-        void CountExpansion() override;
-    };
-}
-
+    void getFilesByExpansions();
+    string getPath() {
+        return path;
+    }
+};
 
 #endif //LINUXPREVIEW_CMDFILE_H

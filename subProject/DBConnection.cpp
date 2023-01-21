@@ -4,59 +4,23 @@
 
 #include "DBConnection.h"
 
-void DBConnection::Create_Operation(sqlite3 *db, const char *sql_statment)
-{
-    rc = sqlite3_exec(db, sql_statment, create_or_insert_callback, 0, &zErrMsg);
-
-    if (rc != SQLITE3_OK)
-    {
-        fprintf(stderr, "SQL error: %s\n", zErrMsg);
-        sqlite3_free(zErrMsg);
-    }
-    else fprintf(stdout, "Table created successfully\n");
-}
-
-void DBConnection::Basic_Operation(sqlite3 *db, const char *sql_statement)
-{
-    rc = sqlite3_exec(db, sql_statement, operation_callback, (void*)data, &zErrMsg);
-
-    if (rc != SQLITE3_OK)
-    {
-        fprintf(stderr, "SQL error: %s\n", zErrMsg);
-        sqlite3_free(zErrMsg);
-    }
-    else
-    {
-        fprintf(stdout, "Operation done successfully\n");
-    }
-}
-
-int DBConnection::Create_Or_Insert_Callback(void *NotUsed, int argc, char **argv, char **azColName)
-{
-    int i;
-
-    for (i = 0; i < argc; i++)
-    {
+int DBConnection::callback(void *NotUsed, int argc, char **argv, char **azColName) {
+    for (int i = 0; i < argc; i++) {
         printf("%s = %s\n", azColName[i], argv[i] ? argv[i] : "NULL");
     }
-
     printf("\n");
-
     return 0;
 }
 
-int DBConnection::Operation_Callback(void *data, int argc, char **argv, char **azColName)
-{
-    int i;
+void DBConnection::openDatabase() {
+    rc = sqlite3_open("test.db", &db);
 
-    fprintf(stderr, "%s ", (const char*)data);
-
-    for (i = 0; i < argc; i++)
-    {
-        printf(("%s = %s\n", azColName[i], argv[i] ? argv[i] : "NULL"));
+    if (rc) {
+        fprintf(stderr, "Can't open database: %s\n", sqlite3_errmsg(db));
+        return;
+    } else {
+        fprintf(stdout, "Opened database successfully\n");
     }
 
-    printf("\n");
-
-    return 0;
+    sqlite3_close(db);
 }
