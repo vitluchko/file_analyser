@@ -1,44 +1,21 @@
-#include <iostream>
-#include <cstring>
-#include <fstream>
-#include <stdio.h>
-#include <stdlib.h>
-#include <sqlite3.h>
-
-#include "subProject/CMDFile.h"
-#include "subProject/Users.h"
-#include "subProject/IFileSystem.h"
+#include "CMDFile.h"
+#include "Users.h"
+#include "DBConnection.h"
 
 using namespace std;
-using namespace KeyWord;
 
 int main()
 {
     CMDFile cmd;
     Users u;
+    DBConnection dbc;
 
-    u.FileReading(cmd);
-    u.Countig(cmd);
+    dbc.openDatabase();
+    /*u.getFilesByExpansions(cmd);
 
-    sqlite3 *db;
-    char *zErrNsg = 0;
-    int rc;
-    char *sql;
-    const char* data = "Callback function called";
-
-    rc = sqlite3_open("test.db", &db);
-
-    if (rc)
-    {
-        fprintf(stderr, "Can't open database: %s\n", sqlite3_errmsg(db));
-        return (0);
-    }
-    else
-    {
-        fprintf(stderr, "Opened database successfully\n");
-    }
-
-    sqlite3_close(db);
+    for(auto i = 0; i < cmd.files_vector.size(); i++) {
+        cout << cmd.files_vector[i] << endl;
+    }*/
 
     return 0;
 }
